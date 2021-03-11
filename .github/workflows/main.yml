@@ -24,6 +24,12 @@ jobs:
           with:
             version: ${{ steps.previoustag.outputs.tag }}
             
+        - name: Display old version
+          run: echo ${{ steps.previoustag.outputs.tag }}
+          
+        - name: Display new version
+          run: echo ${{ steps.semvers.outputs.patch }}
+            
   build_latex:
     runs-on: ubuntu-20.04
     steps:
