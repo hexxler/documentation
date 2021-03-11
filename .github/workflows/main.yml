@@ -9,7 +9,7 @@ jobs:
       runs-on: ubuntu-latest
       outputs:
         previous-tag: ${{ steps.previoustag.outputs.tag }}
-        new-tag: ${{ steps.bump-vers.outputs.new_tag }}
+        new-tag: ${{ steps.semvers.outputs.patch }}
       steps:
         - uses: actions/checkout@v2.2.0
           with:
@@ -19,7 +19,7 @@ jobs:
           uses: "WyriHaximus/github-action-get-previous-tag@v1"
 
         - name: 'Get next minor version'
-          id: bump-vers
+          id: semvers
           uses: "WyriHaximus/github-action-next-semvers@v1"
           with:
             version: ${{ steps.previoustag.outputs.tag }}
