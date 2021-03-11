@@ -11,8 +11,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         
-      - name: Move fonts
-        run: mv -v fonts/* /usr/share/fonts
+      - name: Move ttf fonts
+        run: mv -v fonts/*.ttf /usr/share/fonts
+        
+      - name: Move otf fonts
+        run: mv -v fonts/*.otf /usr/share/fonts
               
       - name: Refresh font cache
         run: fc-cache -f -v
