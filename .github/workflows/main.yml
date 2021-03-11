@@ -5,6 +5,25 @@ on:
     branches: [ main, font_test ]
 
 jobs:
+  create_new_release_tag:
+      runs-on: ubuntu-latest
+      outputs:
+        previous-tag: ${{ steps.previoustag.outputs.tag }}
+        new-tag: ${{ steps.bump-vers.outputs.new_tag }}
+      steps:
+        - uses: actions/checkout@v2.2.0
+          with:
+            fetch-depth: 0
+        - name: 'Get Previous tag'
+          id: previoustag
+          uses: "WyriHaximus/github-action-get-previous-tag@v1"
+
+        - name: 'Get next minor version'
+          id: bump-vers
+          uses: "WyriHaximus/github-action-next-semvers@v1"
+          with:
+            version: ${{ steps.previoustag.outputs.tag }}
+            
   build_latex:
     runs-on: ubuntu-20.04
     steps:
@@ -26,24 +45,17 @@ jobs:
           
       - name: Run Tectonic
         run: tectonic main.tex
-        
-      - name: 'Get Previous tag'
-        id: previoustag
-        uses: "WyriHaximus/github-action-get-previous-tag@v1"
-
-      - name: 'Get next minor version'
-        id: bump-vers
-        uses: "WyriHaximus/github-action-next-semvers@v1"
-        with:
-          version: ${{ steps.previoustag.outputs.tag }}
 
       - name: Checkout new version tag
-        run: echo ${{ steps.previoustag.outputs.tag }}
+        run: |
+          echo ${{ needs.create_new_release_tag.outputs.new_tag }}
+          git tag ${{ needs.create_new_release_tag.outputs.new_tag }}
+          git push origin font_test
       
       - name: Upload pdf
         uses: actions/upload-artifact@v2
         with:
-          name: main_v${{ steps.previoustag.outputs.tag }}
+          name: main_v${{ needs.create_new_release_tag.outputs.new_tag }}
           path: main.pdf
           
       - uses: ncipollo/release-action@v1
