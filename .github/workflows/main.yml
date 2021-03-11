@@ -66,7 +66,7 @@ jobs:
           
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: main_v${{ needs.create_new_release_tag.outputs.new-tag }}
+          artifacts: main_v${{ needs.create_new_release_tag.outputs.new-tag }}.pdf
           tag: "${{ needs.create_new_release_tag.outputs.new-tag }}"
           commit: main
           body: "New Release of documentation"
