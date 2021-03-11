@@ -45,12 +45,6 @@ jobs:
           
       - name: Run Tectonic
         run: tectonic main.tex
-
-      - name: Checkout new version tag
-        run: |
-          echo ${{ needs.create_new_release_tag.outputs.new_tag }}
-          git tag ${{ needs.create_new_release_tag.outputs.new_tag }}
-          git push origin font_test
       
       - name: Upload pdf
         uses: actions/upload-artifact@v2
@@ -62,6 +56,7 @@ jobs:
         with:
           artifacts: main_v${{ steps.previoustag.outputs.tag }}.zip
           body: "New Release of documentation"
+          tag: ${{ needs.create_new_release_tag.outputs.new_tag }}
           token: ${{ secrets.AUTO_RELEASE_TOKEN }}
 
 
