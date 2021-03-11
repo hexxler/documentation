@@ -11,11 +11,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         
-      - name: Create font folder
-        run: mkdir ~/.local/share/fonts
-        
       - name: Move fonts
-        run: mv -v fonts/* ~/.local/share/fonts
+        run: mv -v fonts/* /usr/share/fonts
               
       - name: Refresh font cache
         run: fc-cache -f -v
