@@ -2,7 +2,7 @@ name: Compile and push file to release
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, font_test ]
 
 jobs:
   build_latex:
