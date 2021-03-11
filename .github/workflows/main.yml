@@ -56,7 +56,7 @@ jobs:
       - name: Upload pdf
         uses: actions/upload-artifact@v2
         with:
-          name: main_v${{ needs.create_new_release_tag.outputs.new-tag }}
+          name: main
           path: main.pdf
           
       - name: Display outputs from previous job
@@ -66,7 +66,7 @@ jobs:
           
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: main_v${{ needs.create_new_release_tag.outputs.new-tag }}.pdf
+          artifacts: main
           tag: "${{ needs.create_new_release_tag.outputs.new-tag }}"
           commit: main
           body: "New Release of documentation"
