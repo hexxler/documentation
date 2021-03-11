@@ -17,7 +17,7 @@ jobs:
       - name: Move fonts
         run: mv -v fonts/* ~/.local/share/fonts
               
-      -name: Refresh font cache
+      - name: Refresh font cache
         run: fc-cache -f -v
         
       - uses: wtfjoke/setup-tectonic@v1
