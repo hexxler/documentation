@@ -10,10 +10,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
+      
       - name: Move ttf fonts
         run: mv -v fonts/*.ttf /usr/share/fonts
-        
+
+      - name: Create opentype directory
+        run: mkdir /usr/share/fonts/opentype
       - name: Move otf fonts
         run: mv -v fonts/*.otf /usr/share/fonts/opentype
               
