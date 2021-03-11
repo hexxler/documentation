@@ -53,13 +53,13 @@ jobs:
           path: main.pdf
           
       - name: Display new tag
-        run: echo $VERSION
+        run: echo "$VERSION"
         env:
           VERSION: ${{ needs.create_new_release_tag.outputs.new_tag }}
           
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: main_v${{ steps.previoustag.outputs.tag }}.zip
-          tag: ${{ needs.create_new_release_tag.outputs.new_tag }}
+          artifacts: "main_v${{ steps.previoustag.outputs.tag }}.zip"
+          tag: "${{ needs.create_new_release_tag.outputs.new_tag }}"
           body: "New Release of documentation"
           token: ${{ secrets.AUTO_RELEASE_TOKEN }}
