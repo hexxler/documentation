@@ -15,7 +15,7 @@ jobs:
         run: mv -v fonts/*.ttf /usr/share/fonts
         
       - name: Move otf fonts
-        run: mv -v fonts/*.otf /usr/share/fonts
+        run: mv -v fonts/*.otf /usr/share/fonts/opentype
               
       - name: Refresh font cache
         run: fc-cache -f -v
