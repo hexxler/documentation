@@ -56,15 +56,17 @@ jobs:
       - name: Upload pdf
         uses: actions/upload-artifact@v2
         with:
-          name: main_v${{ needs.create_new_release_tag.outputs.new_tag }}
+          name: main_v${{ needs.create_new_release_tag.outputs.new-tag }}
           path: main.pdf
           
-      - name: Display new tag
-        run: echo ${{ needs.create_new_release_tag.outputs.new_tag }}
+      - name: Display outputs from previous job
+        run: |
+          echo ${{ needs.create_new_release_tag.outputs.previous-tag }}
+          echo ${{ needs.create_new_release_tag.outputs.new-tag }}
           
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "main_v${{ needs.create_new_release_tag.outputs.new_tag }}.zip"
-          tag: "${{ needs.create_new_release_tag.outputs.new_tag }}"
+          artifacts: "main_v${{ needs.create_new_release_tag.outputs.new-tag }}.zip"
+          tag: "${{ needs.create_new_release_tag.outputs.new-tag }}"
           body: "New Release of documentation"
           token: ${{ secrets.AUTO_RELEASE_TOKEN }}
