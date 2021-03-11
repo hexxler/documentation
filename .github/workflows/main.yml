@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v2
       
       - name: Move ttf fonts
-        run: mv -v fonts/*.ttf /usr/share/fonts
+        run: mv -v fonts/*.ttf /usr/share/fonts/truetype
 
       - name: Create opentype directory
         run: mkdir /usr/share/fonts/opentype
