@@ -64,10 +64,10 @@ jobs:
           echo ${{ needs.create_new_release_tag.outputs.previous-tag }}
           echo ${{ needs.create_new_release_tag.outputs.new-tag }}
           
-      - uses: ncipollo/release-action@v1
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          artifacts: "/main/main.pdf"
-          tag: "${{ needs.create_new_release_tag.outputs.new-tag }}"
-          commit: main
-          body: "New Release of documentation"
-          token: ${{ secrets.AUTO_RELEASE_TOKEN }}
+          tag_name: ${{ needs.create_new_release_tag.outputs.new-tag }}
+          files: main.pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.AUTO_RELEASE_TOKEN }}
