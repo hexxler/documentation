@@ -46,11 +46,12 @@ jobs:
       - name: Display installed fonts for debugging
         run: fc-list
         
-      - name: Compile LaTeX document
-        uses: dante-ev/latex-action@master
+      - uses: wtfjoke/setup-tectonic@v1
         with:
-          root_file: main.tex
-          args: --shell-escape
+          github-token: ${{ secrets.AUTO_RELEASE_TOKEN }}
+          
+      - name: Run Tectonic
+        run: tectonic main.tex
       
       - name: Upload pdf
         uses: actions/upload-artifact@v2
@@ -62,11 +63,4 @@ jobs:
         run: |
           echo ${{ needs.create_new_release_tag.outputs.previous-tag }}
           echo ${{ needs.create_new_release_tag.outputs.new-tag }}
-          
-      #- name: Release
-      #  uses: softprops/action-gh-release@v1
-      #  with:
-      #    tag_name: ${{ needs.create_new_release_tag.outputs.new-tag }}
-      #    files: main.pdf
-      #  env:
-      #    GITHUB_TOKEN: ${{ secrets.AUTO_RELEASE_TOKEN }}
+      
