@@ -46,7 +46,7 @@ jobs:
       - name: Setup tectonic with biber
         uses: wtfjoke/setup-tectonic@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.AUTO_RELEASE_TOKEN }}
           biber-version: "latest"
           
       - name: Run Tectonic + Biber
