@@ -52,7 +52,6 @@ jobs:
       - name: Run Tectonic + Biber
         run: |
           tectonic --keep-intermediates --reruns 0 main.tex
-          biber main
           tectonic main.tex
       
       - name: Upload pdf
