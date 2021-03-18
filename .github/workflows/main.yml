@@ -46,18 +46,29 @@ jobs:
       - name: Display installed fonts for debugging
         run: fc-list
         
+      - name: Setup tectonic with biber
+        uses: wtfjoke/setup-tectonic@v1
+        with:
+          github-token: ${{ secrets.AUTO_RELEASE_TOKEN }}
+          biber-version: "latest"
+          
+      - name: Run Tectonic + Biber
+        run: |
+          tectonic --keep-intermediates --reruns 0 main.tex
+          biber main
+          tectonic main.tex  
       - uses: wtfjoke/setup-tectonic@v1
         with:
           github-token: ${{ secrets.AUTO_RELEASE_TOKEN }}
           
-      - name: Run Tectonic
-        run: tectonic main.tex
+      #- name: Run Tectonic
+      #  run: tectonic main.tex
       
-      - name: Upload pdf
-        uses: actions/upload-artifact@v2
-        with:
-          name: main
-          path: main.pdf
+      # - name: Upload pdf
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: main
+      #    path: main.pdf
           
       - name: Display outputs from previous job
         run: |
