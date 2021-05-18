@@ -17,5 +17,14 @@
     %   •etc.
     %
     % Dieses Kapitel muss in jedem Software-Guidebook mehr oder weniger ausführlich enthalten sein.
-
+    \section{Prinzipien}
+	\subsection{Definition of Done}
+	\label{section:DefinitionOfDone}
+	\todo[inline]{Text about DoD, complete itemize list}
+	\begin{itemize}
+		\item Vollständige Umsetzung der für die Story relevanten Akzeptanzkriterien (d.h. alle verknüpften Tasks sind erfüllt)
+		\item Für die neu implementierte Logik existieren Unit-Tests, die den sämtlichen \lstinline|public| Code abdecken
+		\item Für die neu implementierte Logik existieren End-to-End-Tests, die die neue Funktionalität abdecken
+		\item Manuelle Tests durch die Entwickler
+	\end{itemize}
 \end{document}
