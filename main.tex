@@ -31,6 +31,7 @@
 \usepackage{svg}
 \usepackage{csquotes}
 \usepackage{hyperref}
+\usepackage[acronym]{glossaries-extra}
 
 
 % Overall settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -62,13 +63,21 @@
 \subsectionfont{\color{accent_normal}}
 \subsubsectionfont{\color{accent_dark}}
 
-
 % Appendices %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \makeglossaries
-\setacronymstyle{sc-short-long}  
+%\setacronymstyle{sc-short-long}  
 \loadglsentries{appendices/glossaries}
 
 \addbibresource{appendices/references.bib}
+
+% Glossary links repetition %%%%%%%%%%%%%%%%%%%%%%
+\GlsXtrEnableLinkCounting[section]{general,acronym}
+% disable hyperlink if link count is greater than 1:
+\renewcommand*{\glslinkpresetkeys}{%
+	\ifnum\GlsXtrLinkCounterValue{\glslabel}>1
+	\setkeys{glslink}{hyper=false}%
+	\fi
+}
 
 
 %% Document settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
