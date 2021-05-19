@@ -12,5 +12,139 @@
     %   •etc.
     % Dies ist ein optionales Kapitel, das nur verwendet wird, wenn notwendig. Bei komplexeren Systeme jedoch sehr häufig der Fall.
 
+	\section{Codebase}
+	\par In diesem Kapitel werden allfällige Codestrukturen näher erläutert, sofern diese Erklärungsbedarf besitzen. Ebenfalls aufgeführt werden alle selbstkonzipierten, verwendeten Interfaces.
+	\subsection{Koordinatensystem}
+	
+	\subsection{Data-Binding und Event-Handling}
+	\subsubsection{Data-Binding}
+	\par Das Data-Binding wird mittels Kappselung realisiert. Klassen aus der Unity-Umgebung (MonoBehaviours) verwenden Properties, deren Getter-Methoden auf die entsprechenden Interfaces der gekappselten Klassen aus der regulären C\#-Umgebung zurückgreifen. Die Interfaces wiederum wurden von den Logikklassen implementiert und besitzen die gewünschten Daten. Näheres zur Architektur ist im Kapitel \nameref{section:UnityCodeArchitektur} beschrieben.
+	\par Damit Daten stets aktuell sind und korrekt repräsentiert werden, wird ein Publish-Subscribe-Pattern verwendet.
+	\subsubsection{Event-Handling}
+	
+	
+	
+	
+	\subsection{Interfaces}
+	\subsubsection{Plättchen / Tile}
+	\begin{lstlisting}
+  public interface ITile
+  {
+	#region Events
+	event Action TileChangedEvent;
+	event Action<Coordinate> RemovalRequestedEvent;
+	#endregion
+	#region Data
+	Coordinate Coordinate { get; set; }
+	int Rotation { get; }
+	EState State { get; set; }
+	ITileType Type { get; set; }
+	ITileBehaviour Behaviour { get; set; }
+	ITileNature Nature { get; set; }
+	#endregion
+	#region Logic
+	void RequestRemoval();
+	void Rotate(int rotation);
+	#endregion
+  }
+	\end{lstlisting}
 
+	\subsubsection{Plättchentyp / TileType}
+	\begin{lstlisting}
+  public interface ITileType : IFunctionalValues
+  {
+	EType Type { get; }
+	int ValueOfRelationshipTo(EType otherType);
+  }
+	\end{lstlisting}
+
+	\subsubsection{Plättchenverhalten / TileBehaviour}
+	\begin{lstlisting}
+  public interface ITileBehaviour : IFunctionalValues
+  {
+	EBehaviour Behaviour { get; }
+	void ApplyBehaviour(ITile originalTile, ITile otherTile);
+  }
+	\end{lstlisting}
+
+	\subsubsection{Plättchenart / TileNature}
+	\begin{lstlisting}
+  public interface ITileNature : IFunctionalValues
+  {
+	ENature Nature { get; }
+	IEnumerable<Coordinate> RelevantCoordinates
+		(Coordinate coordinate, int rotation);
+  }
+	\end{lstlisting}
+
+	\subsubsection{Plättchenstapel / TileStack}
+	\begin{lstlisting}
+  public interface ITileStack
+  {
+	void InitializeStack();
+	void PushTiles(List<ITile> tiles);
+	void Push(ITile newTile);
+	ITile Pop();
+	int Count();
+	ITile Peek();
+	List<ITile> GetFirstTenTiles();
+	void AddNewRandomTiles(int amount);
+  }
+	\end{lstlisting}
+
+	\subsubsection{Spielfeld / TileMap}
+	\begin{lstlisting}
+  public interface ITileMap<T> where T : class, ITile
+  {
+	void PlaceTile(T tile, Coordinate coordinate);
+	void RemoveTile(Coordinate coordinate);
+	T GetTile(Coordinate coordinate);
+	bool IsEmpty(Coordinate coordinate);
+	event EventHandler<TileMapEventArgs<T>> TilePlaced;
+	event EventHandler<TileMapEventArgs<T>> TileRemoved;
+  }
+	
+
+	\end{lstlisting}
+	\begin{lstlisting}
+  public class TileMapEventArgs<T> : EventArgs where T : class, ITile
+  {
+	public TileMapEventArgs(ITileMap<T> tileMap, T tile)
+	{
+		Map = tileMap;
+		Tile = tile;
+	}
+	
+	public ITileMap<T> Map { get; set; }
+	public T Tile { get; set; }
+  }
+	\end{lstlisting}
+
+	\subsubsection{Punktestand / GameScore}
+	\begin{lstlisting}
+  public interface IGameScore
+  {
+	int IncreaseScore(int amount);
+	int GetCurrentScore();
+	int GetNextScoreThreshold();
+	int PointsUntilNextThreshold();
+  }
+	\end{lstlisting}
+
+	\subsubsection{Punkterechner / TileResolver}
+	\begin{lstlisting}
+  public interface ITileResolver<T> where T : class, ITile
+  {
+	void ApplyBehaviour(T tile);
+	int CalculatePoints(T tile);
+  }
+	\end{lstlisting}
+
+	\subsubsection{Wahrscheinlichkeitswert / FunctionalValues}
+	\begin{lstlisting}
+  public interface IFunctionalValues
+  {
+	int CalculateWeight();
+  }
+	\end{lstlisting}
 \end{document}

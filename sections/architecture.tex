@@ -64,6 +64,7 @@
 	\end{figure}
 
 	\subsection{Unity/Code-Architektur}
+	\label{section:UnityCodeArchitektur}
 	\par Unity strukturiert den Aufbau einzelner Bereiche des Spiels mittels Szenen. Szenen wiederum beinhalten eine variable Anzahl GameObjects, welche wiederum aus diversen Komponenten und eventuell weiteren GameObjects bestehen. MonoBehaviours können den GameObjects als Komponente hinzugefügt werden und enthalten mit dem GameObject assoziierten Code. MonoBehaviours verwenden Interfaces, um mit der eigentlichen, Unity agnostischen Logik des Spiels zu interagieren.
 	\par Die Spiellogik wird in regulären C\#-Klassen implementiert und spiegelt die Spielregeln wieder, ohne etwas über die schlussendliche Darstellung wissen zu müssen. Klassen der Spiellogik verwenden wenn möglich keine Funktionen der UnityEngine. Eine Ausnahme stellen hier beispielsweise Structs wie Vector2 und Vector3 dar. Klassen der Spiellogik implementieren Interfaces und machen somit klar definierte Funktionalitäten nach aussen zugänglich.
 	\par Die Spiellogik verwendet Datenklassen und Structs, die kein konkretes Verhalten der Spielregeln implementieren, sondern lediglich Zustände speichern.

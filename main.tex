@@ -79,6 +79,24 @@
 	\fi
 }
 
+% Code listing style %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstdefinestyle{sharpc}{language=[Sharp]C, frame=lr, rulecolor=\color{accent_light!80!black}}
+
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.9,0,0}
+
+\lstset{language=[Sharp]C,
+	showspaces=false,
+	showtabs=false,
+	breaklines=true,
+	showstringspaces=false,
+	breakatwhitespace=true,
+	escapeinside={(*@}{@*)},
+	commentstyle=\color{accent_light},
+	keywordstyle=\color{stress_dark},
+	stringstyle=\color{content_light}
+}
 
 %% Document settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % content settings
@@ -177,12 +195,14 @@
 
 	%\subfile{sections/example}
 	
+	\lstset{style=sharpc}
+	
 	%% PROJEKT VISION TEIL %%
 	%\subfile{sections/productvision/produktidee}
 	%\subfile{sections/productvision/spielregeln}
 	%\subfile{sections/productvision/umsetzung}
 	%\subfile{sections/productvision/architektur}
-	\subfile{sections/productvision/technologien}	
+	%\subfile{sections/productvision/technologien}	
 	
 	%% PROJEKT DOKU TEIL %%
 	\subfile{sections/productvision/introduction}
