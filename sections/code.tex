@@ -16,8 +16,14 @@
 	\par In diesem Kapitel werden allfällige Codestrukturen näher erläutert, sofern diese Erklärungsbedarf besitzen. Ebenfalls aufgeführt werden alle selbstkonzipierten, verwendeten Interfaces.
 	
 	\subsection{Koordinatensystem}
-	\todo{write text about coordinatesystem}
-	
+	\par Das Koordinatensystem benutzt drei Achsen (cube), um ein hexagonales Raster im zweidimensionalen Raum abzubilden. Hexagonale Raster lassen sich auch mit zwei Achsen beschreiben (axial), wobei es in solch einem Fall nötig ist, jede zweite Reihe durch einen Offset zu verschieben. Die axialen lassen sich in kubische Werte umrechnen und umgekehrt. Die kubischen Koordinaten ergeben in ihrer Summe stets 0.
+	\par Die jeweiligen Rasterkoordinaten lassen sich durch geschickte Verknüpfung von kubischen und axialen Koordinaten in tatsächliche Raumkoordinaten umrechnen.
+	\par Die Implementation richtet sich im Allgemeinen nach der sehr ausführlich beschriebenen \href{https://www.redblobgames.com/grids/hexagons/}{Dokumentation} über hexagonale Raster, die man bei Red Blob Games finden kann.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[angle=0, width=0.6\linewidth]{coordinate-system.png}
+	\end{figure}
+
 	\subsection{Data-Binding und Event-Handling}
 	\begin{figure}[H]
 		\centering
