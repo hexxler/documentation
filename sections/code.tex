@@ -14,14 +14,22 @@
 
 	\section{Codebase}
 	\par In diesem Kapitel werden allfällige Codestrukturen näher erläutert, sofern diese Erklärungsbedarf besitzen. Ebenfalls aufgeführt werden alle selbstkonzipierten, verwendeten Interfaces.
+	
 	\subsection{Koordinatensystem}
 	\todo{write text about coordinatesystem}
+	
 	\subsection{Data-Binding und Event-Handling}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[angle=0, width=0.6\linewidth]{DataBinding_Eventhandling.jpg}
+	\end{figure}
 	\subsubsection{Data-Binding}
 	\par Das Data-Binding wird mittels Kappselung realisiert. Klassen aus der Unity-Umgebung (MonoBehaviours) verwenden Properties, deren Getter-Methoden auf die entsprechenden Interfaces der gekappselten Klassen aus der regulären C\#-Umgebung zurückgreifen. Die Interfaces wiederum wurden von den Logikklassen implementiert und besitzen die gewünschten Daten. Näheres zur Architektur ist im Kapitel \nameref{section:UnityCodeArchitektur} beschrieben.
 	\par Damit Daten stets aktuell sind und korrekt repräsentiert werden, wird ein Publish-Subscribe-Pattern verwendet.
+	
 	\subsubsection{Event-Handling}
-	\todo{write text about eventhandling}
+	\par Ändern sich Werte auf der C\#-Ebene, so lösen die jeweiligen Klassen einen Event aus, ähnlich dem \href{https://docs.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifypropertychanged?view=net-5.0}{INotifyPropertyChanged}-Interface. MonoBehaviour-Klassen können über die Interfaces an den jeweiligen Events als Subscriber teilnehmen.
+	\par Event-Handling auf Unity-Ebene wird durch die Engine selbst bereits abgewickelt. Die Entwickler können sich an den bestehenden Konzepten von \gls{unity} bedienen.
 	
 	\subsection{Interfaces}
 	\subsubsection{Plättchen / Tile}
@@ -130,6 +138,7 @@
 	\end{lstlisting}
 
 	\subsubsection{Punkterechner / TileResolver}
+	\par Ein TileResolver wird dafür eingesetzt, die Abwicklung der Spielregeln zu handhaben, nachdem ein Plättchen platziert wurde.
 	\begin{lstlisting}
   public interface ITileResolver<T> where T : class, ITile
   {
@@ -139,6 +148,7 @@
 	\end{lstlisting}
 
 	\subsubsection{Wahrscheinlichkeitswert / FunctionalValues}
+	\par Um eine spielerisch sinnvolle Verteilung der jeweiligen Plättchentypen, -arten und -verhalten zu erreichen, implementieren all diese Klassen das FunctionalValues Interface. Es liefert eine Gewichtung, die im Kontext zur Auswirkung auf das Spiel steht.
 	\begin{lstlisting}
   public interface IFunctionalValues
   {
