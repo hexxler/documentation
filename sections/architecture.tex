@@ -57,7 +57,6 @@
 	\end{itemize}
 
 	\subsection{Big Picture}
-	\todo{change title name}
 	\par Das Entwicklerteam benutzt Unity, Visual Studio und Blender für die Entwicklung von \gls{hexxle}. Unity agiert hier als zentraler Ankerpunkt des Projekts und ist für die Vernetzung aller relevanten Systeme zuständig. Für die Versionierung wird GitHub verwendet. Das Projektmanagement findet mithilfe von Jira statt.
 	\begin{figure}[H]
 	\centering
@@ -76,8 +75,7 @@
 	
 	\subsection{MonoBehaviours-Architektur}
 	\par Die verschiedenen MonoBehaviours interagieren einerseits mit Komponenten der Unity GameObjects (MeshRenderer, Transform, UI-Elemente etc.) und andererseits mit Interfaces aus der regulären C\#-Umgebung.
-	\todo{Bild über MonoBehaviour Architektur}
 	\subsection{C\#-Code-Architektur}
-	\todo{Text über C\# Code Architektur}
-	\todo{Bild über C\# Code Architektur}
+	\par Die \gls{csharp}-Architektur soll die einzelnen Systeme des Spiels wiederspiegeln. Wichtig ist auch, dass so gut wie möglich darauf verzichtet wird, Klassen und Interfaces aus der UnityEngine zu verwenden.
+	\par Grundsätzlich lassen sich die Skriptdateien aufteilen in Enums, Datenklassen, die als Wrapper für die Enum-Werte fungieren und zusätzliche Funktionalitäten bereitstellen und Logikklassen, die eine bestimmte Instanz der Spielregeln repräsentieren. Für ein einheitliches Verständnis werden Interfaces verwendet und implementiert. Mehr dazu im Kapitel \nameref{section:Interfaces}.
 \end{document}
