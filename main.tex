@@ -31,6 +31,7 @@
 \usepackage{svg}
 \usepackage{csquotes}
 \usepackage{hyperref}
+\usepackage[acronym]{glossaries-extra}
 
 
 % Overall settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -62,19 +63,45 @@
 \subsectionfont{\color{accent_normal}}
 \subsubsectionfont{\color{accent_dark}}
 
-
 % Appendices %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \makeglossaries
-\setacronymstyle{sc-short-long}  
+%\setacronymstyle{sc-short-long}  
 \loadglsentries{appendices/glossaries}
 
 \addbibresource{appendices/references.bib}
 
+% Glossary links repetition %%%%%%%%%%%%%%%%%%%%%%
+\GlsXtrEnableLinkCounting[section]{general,acronym}
+% disable hyperlink if link count is greater than 1:
+\renewcommand*{\glslinkpresetkeys}{%
+	\ifnum\GlsXtrLinkCounterValue{\glslabel}>1
+	\setkeys{glslink}{hyper=false}%
+	\fi
+}
+
+% Code listing style %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstdefinestyle{sharpc}{language=[Sharp]C, frame=lr, rulecolor=\color{accent_light!80!black}}
+
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.9,0,0}
+
+\lstset{language=[Sharp]C,
+	showspaces=false,
+	showtabs=false,
+	breaklines=true,
+	showstringspaces=false,
+	breakatwhitespace=true,
+	escapeinside={(*@}{@*)},
+	commentstyle=\color{accent_light},
+	keywordstyle=\color{stress_dark},
+	stringstyle=\color{content_light}
+}
 
 %% Document settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % content settings
 \newcommand{\project}{Projekt Hexxle}
-\newcommand{\outline}{Produktvision}
+\newcommand{\outline}{Projekt Hexxle\\Projektdokumentation}
 
 
 \title{
@@ -133,11 +160,11 @@
 \makeatother
 
 % \todo{Draft watermark, should be removed for final}
-\usepackage{draftwatermark}
-\SetWatermarkText{Draft}
-\SetWatermarkColor[gray]{0.9}
-\SetWatermarkAngle{60}
-\SetWatermarkScale{20}
+%\usepackage{draftwatermark}
+%\SetWatermarkText{Draft}
+%\SetWatermarkColor[gray]{0.9}
+%\SetWatermarkAngle{60}
+%\SetWatermarkScale{20}
 % 
 
 % Improvements for package todonotes, remove for final
@@ -168,34 +195,41 @@
 
 	%\subfile{sections/example}
 	
+	\lstset{style=sharpc}
+	
 	%% PROJEKT VISION TEIL %%
+	%\subfile{sections/productvision/produktidee}
+	%\subfile{sections/productvision/spielregeln}
+	%\subfile{sections/productvision/umsetzung}
+	%\subfile{sections/productvision/architektur}
+	%\subfile{sections/productvision/technologien}	
+	
+	%% PROJEKT DOKU TEIL %%
 	\subfile{sections/productvision/introduction}
-	\subfile{sections/productvision/produktidee}
-	\subfile{sections/productvision/spielregeln}
-	\subfile{sections/productvision/umsetzung}
-	\subfile{sections/productvision/risiken}
-	\subfile{sections/productvision/architektur}
-	\subfile{sections/productvision/technologien}
+	\subfile{sections/context}
+	\subfile{sections/objectives_functional_overview}
+	\subfile{sections/quality_attributes_non_functional_requirements}
+	\subfile{sections/constraints}
+	\subfile{sections/principles}
+	\subfile{sections/architecture} %incomplete
+	\subfile{sections/external_interfaces}
+	\subfile{sections/code}
+	\subfile{sections/data} %ausbaufähig
+	\subfile{sections/infrastructure_architecture} %currently EMPTY
+	\subfile{sections/deployment} %currently EMPTY
+	\subfile{sections/operation_support} 
+	\subfile{sections/decision_log}	
+	
+	%% PROJEKT ZUSATZ %%
+	\appendix
 	\subfile{sections/sprint_reviews/sprint_0}
 	\subfile{sections/sprint_reviews/sprint_1}
 	\subfile{sections/sprint_reviews/sprint_2}
-	%\subfile{sections/sprint_reviews/sprint_3}
-	\subfile{sections/productvision/miscellaneous}	
-	
-	%% PROJEKT DOKU TEIL %%
-	\subfile{sections/context}
-	%\subfile{sections/objectives_functional_overview}
-	%\subfile{sections/quality_attributes_non_functional_requirements}
-	%\subfile{sections/constraints}
-	%\subfile{sections/principles}
-	%\subfile{sections/architecture}
-	%\subfile{sections/external_interfaces}
-	%\subfile{sections/code}
-	%\subfile{sections/data}
-	%\subfile{sections/infrastructure_architecture}
-	%\subfile{sections/deployment}
-	%\subfile{sections/operation_support}
-	\subfile{sections/decision_log}	
+	\subfile{sections/sprint_reviews/sprint_3}
+	\subfile{sections/sprint_reviews/sprint_4}
+	\subfile{sections/appendix/spielregeln}
+	\subfile{sections/productvision/risiken}
+	\subfile{sections/productvision/miscellaneous}
 	% add sections here
 	
 	\newpage

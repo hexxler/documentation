@@ -27,5 +27,28 @@
     % Eine einfache Auflistung mit präziser Definition, die keinen Spielraum für Interpretation lässt, soll-te ausreichen.
     % Es sind nicht immer alle Anforderungen sinnvoll bzw. erforderlich.
     % Dieses Kapitel muss in jedem Software-Guidebook enthalten sein
-
+	\section{Nicht-funktionale Anforderungen und Qualitätsmerkmale}
+	\label{section:NonFunctionalRequirements}
+	\subsection{Qualitätsmerkmale}
+	\subsubsection{Erweiterbarkeit}
+	\par Die Umsetzung der Systeme im Spiel (Plättchentypen, -arten, -verhalten, etc.) soll so gestaltet werden, dass Erweiterungen ein Minimum an Aufwand erfordern.
+	\par Desweiteren sollen oft wiederverwendete Objekte in \gls{unity} als Prefab gestaltet werden und somit sowohl die Wiederverwendung als auch die Erweiterbarkeit gewährleisten. 
+	
+	\subsubsection{Zuverlässigkeit}
+	\par Die Regeln des Spiels sind klar definiert, weshalb auch gewährleistet werden soll, dass die Spieler mit ihren Handlungen kein unerwartetes Verhalten seitens des Spiels auslösen können. Um dies zu erreichen, implementieren die Entwickler sowohl Unit-Tests als auch End-to-End-Tests, die sämtliche Äquivalenzklassen abdecken sollen.
+	
+	\subsection{Betriebssysteme}
+	\par \gls{hexxle} zielt in erster Linie darauf ab, unter dem Betriebssystem Windows lauffähig zu sein. Dank \gls{unity} kann davon ausgegangen werden, dass diese Anforderung einfach zu erfüllen sein wird.
+	\par \gls{unity} ermöglicht es auch, bestehenden Code ohne grosse Anpassungen auf weitere Systeme zu portieren. Dies wird zum jetzigen Zeitpunkt allerdings noch nicht angestrebt.
+	
+	\subsection{Internationalisierung}
+	\par \gls{hexxle} ist vorerst nur mit einer englischen Sprachausgabe geplant. Deshalb soll auch kein besonderer Wert darauf gelegt werden, mehrere Sprachausgaben unterstützen zu können.
+	
+	\subsection{Benutzerfreundlichkeit}
+	\subsubsection{Eingabegeräte}
+	\par \gls{hexxle} unterstützt eine Steuerung mittels Tastatur und Maus. Unterstützung von Gamecontrollern oder Touchdisplays ist vorerst nicht geplant.
+	
+	\subsubsection{Farbschema}
+	\par \gls{hexxle} verwendet ein Farbschema, das es auch Menschen mit einer Farbschwäche ermöglichen soll, problemlos mit dem Spiel zu interagieren.
+	
 \end{document}

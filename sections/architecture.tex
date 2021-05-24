@@ -35,7 +35,47 @@
     %   •Was sind die Schlüsselschnittstellen (API)? Nach aussen und zwischen den Komponenten.
     %
     %Dieses Kapitel muss in jedem Software-Guidebook enthalten sein.
+	\section{Architektur}
+	\subsection{Verwendete Technologien}
+	\par Zur Entwicklung von \gls{hexxle} wird die Engine \gls{unity} verwendet. Als Programmiersprache wird \gls{csharp} verwendet. Neben der Entwicklung werden auch diverse Tools für das Projektmanagement verwendet. Im Folgenden eine kurze Übersicht über verwendete Technologien:
 
+	\subsubsection{Funktionale Technologien}
+	\begin{itemize}
+		\item \gls{csharp}
+		\item Unity-Version 2019.4.X LTS (long time support)
+		\item Visual Studio bzw. Visual Studio Code
+		\item Blender
+	\end{itemize}
+	\subsubsection{Administrative Tools}
+	\begin{itemize}
+		\item \href{https://github.com/hexxler/hexxle_game}{GitHub (Hexxle)}
+		\item \href{https://github.com/hexxler/documentation}{GitHub (Dokumentation)}
+		\item \href{https://hexxle.atlassian.net/jira/software/projects/HEXXLE/boards/1}{Jira}
+		\item Whatsapp
+		\item Microsoft Teams
+		\item Parabol (Sprintretrospektiven)
+	\end{itemize}
 
+	\subsection{Big Picture}
+	\par Das Entwicklerteam benutzt Unity, Visual Studio und Blender für die Entwicklung von \gls{hexxle}. Unity agiert hier als zentraler Ankerpunkt des Projekts und ist für die Vernetzung aller relevanten Systeme zuständig. Für die Versionierung wird GitHub verwendet. Das Projektmanagement findet mithilfe von Jira statt.
+	\begin{figure}[H]
+	\centering
+	\includegraphics[angle=-90, width=0.6\linewidth]{big_picture.jpg}
+	\end{figure}
 
+	\subsection{Unity/Code-Architektur}
+	\label{section:UnityCodeArchitektur}
+	\par Unity strukturiert den Aufbau einzelner Bereiche des Spiels mittels Szenen. Szenen wiederum beinhalten eine variable Anzahl GameObjects, welche wiederum aus diversen Komponenten und eventuell weiteren GameObjects bestehen. MonoBehaviours können den GameObjects als Komponente hinzugefügt werden und enthalten mit dem GameObject assoziierten Code. MonoBehaviours verwenden Interfaces, um mit der eigentlichen, Unity agnostischen Logik des Spiels zu interagieren.
+	\par Die Spiellogik wird in regulären C\#-Klassen implementiert und spiegelt die Spielregeln wieder, ohne etwas über die schlussendliche Darstellung wissen zu müssen. Klassen der Spiellogik verwenden wenn möglich keine Funktionen der UnityEngine. Eine Ausnahme stellen hier beispielsweise Structs wie Vector2 und Vector3 dar. Klassen der Spiellogik implementieren Interfaces und machen somit klar definierte Funktionalitäten nach aussen zugänglich.
+	\par Die Spiellogik verwendet Datenklassen und Structs, die kein konkretes Verhalten der Spielregeln implementieren, sondern lediglich Zustände speichern.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[angle=0, width=0.6\linewidth]{Container_View.jpg}
+	\end{figure}
+	
+	\subsection{MonoBehaviours-Architektur}
+	\par Die verschiedenen MonoBehaviours interagieren einerseits mit Komponenten der Unity GameObjects (MeshRenderer, Transform, UI-Elemente etc.) und andererseits mit Interfaces aus der regulären C\#-Umgebung.
+	\subsection{C\#-Code-Architektur}
+	\par Die \gls{csharp}-Architektur soll die einzelnen Systeme des Spiels wiederspiegeln. Wichtig ist auch, dass so gut wie möglich darauf verzichtet wird, Klassen und Interfaces aus der UnityEngine zu verwenden.
+	\par Grundsätzlich lassen sich die Skriptdateien aufteilen in Enums, Datenklassen, die als Wrapper für die Enum-Werte fungieren und zusätzliche Funktionalitäten bereitstellen und Logikklassen, die eine bestimmte Instanz der Spielregeln repräsentieren. Für ein einheitliches Verständnis werden Interfaces verwendet und implementiert. Mehr dazu im Kapitel \nameref{section:Interfaces}.
 \end{document}

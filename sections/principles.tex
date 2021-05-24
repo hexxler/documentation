@@ -17,5 +17,37 @@
     %   •etc.
     %
     % Dieses Kapitel muss in jedem Software-Guidebook mehr oder weniger ausführlich enthalten sein.
-
+    \section{Prinzipien}
+    \label{section:Prinzipien}
+    \par Das Team von \gls{hexxle} hat sich darauf geeinigt, einige Prinzipien festzulegen, unter welchen die Entwicklung stattfinden wird.
+    
+    \subsection{Clean Code Massnahmen}
+    \label{section:CleanCodeMassnahmen}
+    \par Die Entwickler halten sich an gängige Clean Code Standards. Darunter sind folgende Punkte besonders zu beachten:
+    \begin{itemize}
+    	\item DRY (Don't repeat yourself)
+    	\item Single-Responsibility-Prinzip
+    	\item Liskovsches Substitutionsprinzip
+    	\item YAGNI (You ain't gonna need it)
+    \end{itemize}
+    \par Sollten diese in der Software-Branche gängigen Begriffe den Teammitgliedern nicht bekannt sein, sind sie verpflichtet, sich selbständig darüber zu informieren.
+    
+    \subsection{Coding Convention C\#}
+    \label{section:CodingConvention}
+    \par Die Teammitglieder befolgen die für \gls{csharp} gängige Coding Convention. Mehr dazu findet man auf \href{https://github.com/ktaranov/naming-convention/blob/master/C\%23\%20Coding\%20Standards\%20and\%20Naming\%20Conventions.md}{GitHub} und bei \href{https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/inside-a-program/coding-conventions}{Microsoft}.
+    \par Die im Code verwendete Sprache für das Benennen von Variablen, Methoden, etc. und für die Dokumentation ist Englisch.
+    
+	\subsection{Definition of Done}
+	\label{section:DefinitionOfDone}
+	\par Bevor eine Story als abgeschlossen gilt, muss gewährleistet sein, dass die folgenden Punkte erfüllt wurden:
+	\begin{itemize}
+		\item Die Story wurde entsprechend der Akzeptanzkriterien vollständige umgesetzt (d.h. auch alle verknüpften Tasks sind abgeschlossen). 
+		\item Der neu hinzugefügte Codeteil wurde einem Peer-Review unterzogen und für genügend befunden.
+		\item Bisherige End-to-End-Tests und Unit-Tests laufen erfolgreich ab bzw. wurden entsprechend der neuen Funktionalität angepasst.
+		\item Nicht für sich selbst sprechender Code wurde hinreichend dokumentiert.
+		\item Für den neu implementierten Code existieren Unit-Tests.
+		\item \textbf{optional:} Für den neu implementierten Code existieren End-to-End-Tests.
+		\item Manuelle Tests durch die Entwickler ergaben keine Fehler. 
+		\item Das Feature bzw. die Story wurde durch den Product Owner als vollständig abgesegnet.
+	\end{itemize}
 \end{document}
